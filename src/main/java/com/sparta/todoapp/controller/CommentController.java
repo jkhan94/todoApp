@@ -3,8 +3,6 @@ package com.sparta.todoapp.controller;
 import com.sparta.todoapp.dto.CommentRequestDto;
 import com.sparta.todoapp.dto.CommentResponseDto;
 import com.sparta.todoapp.dto.ScheduleRequestDto;
-import com.sparta.todoapp.dto.ScheduleResponseDto;
-import com.sparta.todoapp.entity.Schedule;
 import com.sparta.todoapp.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -25,26 +23,26 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/{scheduleId}")
     @Operation(summary = "선택한 일정에 댓글 등록", description = "고유번호, 댓글 내용, 댓글을 작성한 사용자 아이디, 댓글이 작성된 일정 아이디, 작성일을 전달받아 디비에 저장")
     @Parameters({
             @Parameter(name = "contents", description = "댓글 내용", example = "요구사항에 맞춰서 댓글 CRUD 구현 완료"),
             @Parameter(name = "createdDate", description = "댓글 작성일자", example = "2024-05-27"),
     })
-    public CommentResponseDto createComment(@PathVariable Long id, @RequestBody CommentRequestDto requestDto) {
-        return commentService.createComment(id, requestDto);
+    public CommentResponseDto createComment(@PathVariable Long scheduleId, @RequestBody CommentRequestDto requestDto) {
+        return commentService.createComment(scheduleId, requestDto);
     }
 
     @GetMapping
     @Operation(summary = "댓글 조회", description = "디비에 저장된 댓글의 고유번호, 내용, 작성한 사용자 아이디, 선택된 일정 아이디, 작성일을 조회")
     public List<CommentResponseDto> getComment() {
-        return commentService.getComment();
+        return commentService.findCommentById();
     }
 
-    @PutMapping("/{id}")
-    @Operation(summary = "댓글 수정", description = "선택한 일정의 댓글을 수정")
-    public CommentResponseDto updateComment(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
-        return commentService.updateComment(id, requestDto);
+    @PutMapping("/{scheduleId}/{commentId}")
+    @Operation(summary = "댓글 수정", description = "선택한 일정의 댓글 내용만 수정")
+    public CommentResponseDto updateComment(@PathVariable Long scheduleId,@PathVariable Long commentId, @RequestBody CommentRequestDto requestDto) {
+        return commentService.updateComment(scheduleId, commentId, requestDto);
     }
 
     @DeleteMapping("/{id}")
