@@ -7,6 +7,7 @@ import com.sparta.todoapp.dto.CommentResponseDto;
 import com.sparta.todoapp.entity.Comment;
 import com.sparta.todoapp.entity.Schedule;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,9 +47,9 @@ public class CommentService {
     public void deleteComment(Long scheduleId, Long commentId) {
         Comment comment = findCommentById(commentId);
         // || comment.getUserId() != requestDto.getUserId()
-        if (scheduleId!=comment.getSchedule().getId()) {
+        if (scheduleId != comment.getSchedule().getId()) {
             throw new IllegalArgumentException("삭제할 수 없는 댓글 입니다");
-        }else{
+        } else {
             commentRepository.delete(comment);
         }
     }

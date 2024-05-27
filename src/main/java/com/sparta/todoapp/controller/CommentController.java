@@ -1,13 +1,17 @@
 package com.sparta.todoapp.controller;
 
+import com.sparta.todoapp.CommonResponse;
 import com.sparta.todoapp.dto.CommentRequestDto;
 import com.sparta.todoapp.dto.CommentResponseDto;
 import com.sparta.todoapp.dto.ScheduleRequestDto;
+import com.sparta.todoapp.entity.StatusEnum;
 import com.sparta.todoapp.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,8 +51,12 @@ public class CommentController {
 
     @DeleteMapping("/{scheduleId}/{commentId}")
     @Operation(summary = "댓글 삭제", description = "선택한 일정의 댓글을 삭제")
-    public void deleteComment(@PathVariable Long scheduleId, @PathVariable Long commentId) {
+    public ResponseEntity<CommonResponse> deleteComment(@PathVariable Long scheduleId, @PathVariable Long commentId) {
         commentService.deleteComment(scheduleId, commentId);
+        return ResponseEntity.ok().body(CommonResponse.builder()
+                .statusCode(HttpStatus.OK.value())
+                .msg("삭제가 완료 되었습니다.")
+                .build());
     }
 
 }
