@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -18,7 +20,8 @@ public class ScheduleResponseDto {
     private String contents;
     private String responsibility;
 //    private String password;
-    private LocalDateTime createdDate;
+    private Timestamp createdDate;
+    private List<CommentResponseDto> comments;
 
     public ScheduleResponseDto(Schedule schedule) {
         this.id = schedule.getId();
@@ -27,5 +30,6 @@ public class ScheduleResponseDto {
         this.responsibility = schedule.getResponsibility();
 //        this.password = schedule.getPassword();
         this.createdDate = schedule.getCreatedDate();
+        this.comments = schedule.getCommentList().stream().map(CommentResponseDto::new).collect(Collectors.toList());
     }
 }
