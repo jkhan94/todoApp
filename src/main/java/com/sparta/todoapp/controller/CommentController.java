@@ -45,10 +45,10 @@ public class CommentController {
         return commentService.updateComment(scheduleId, commentId, requestDto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{scheduleId}/{commentId}")
     @Operation(summary = "댓글 삭제", description = "선택한 일정의 댓글을 삭제")
-    public void deleteComment(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
-        commentService.deleteComment(id,requestDto);
+    public void deleteComment(@PathVariable Long scheduleId, @PathVariable Long commentId) {
+        commentService.deleteComment(scheduleId, commentId);
     }
 
 }
