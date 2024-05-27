@@ -5,6 +5,7 @@ import com.sparta.todoapp.Repository.ScheduleRepository;
 import com.sparta.todoapp.dto.CommentRequestDto;
 import com.sparta.todoapp.dto.CommentResponseDto;
 import com.sparta.todoapp.dto.ScheduleRequestDto;
+import com.sparta.todoapp.dto.ScheduleResponseDto;
 import com.sparta.todoapp.entity.Comment;
 import com.sparta.todoapp.entity.Schedule;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class CommentService {
     }
 
     public List<CommentResponseDto> getComment() {
-        return null;
+        return commentRepository.findAll().stream().map(CommentResponseDto::new).toList();
     }
 
     public CommentResponseDto updateComment(Long id, ScheduleRequestDto requestDto) {
