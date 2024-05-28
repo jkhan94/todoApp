@@ -1,11 +1,11 @@
 package com.sparta.todoapp.service;
 
-import com.sparta.todoapp.Repository.CommentRepository;
-import com.sparta.todoapp.Repository.ScheduleRepository;
 import com.sparta.todoapp.dto.CommentRequestDto;
 import com.sparta.todoapp.dto.CommentResponseDto;
 import com.sparta.todoapp.entity.Comment;
 import com.sparta.todoapp.entity.Schedule;
+import com.sparta.todoapp.repository.CommentRepository;
+import com.sparta.todoapp.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
