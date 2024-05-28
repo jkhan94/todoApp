@@ -17,20 +17,20 @@ public class Comment extends Timestamped {
     private Long id;
     @Column(name = "contents", nullable = false, length = 500)
     private String contents;
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+//    @Column(name = "user_id", nullable = false)
+//    private Long userId;
 
     @ManyToOne
     @JoinColumn(name = "schedule_id", nullable = false)
     private Schedule schedule;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     public Comment(CommentRequestDto requestDto) {
         this.contents = requestDto.getContents();
-        this.userId = requestDto.getUserId();
+//        this.userId = requestDto.getUserId();
     }
 
     public void update(CommentRequestDto requestDto) {

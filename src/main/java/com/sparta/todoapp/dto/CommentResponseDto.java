@@ -22,7 +22,7 @@ public class CommentResponseDto {
     public CommentResponseDto(Comment comment) {
         this.id = comment.getId();
         this.contents = comment.getContents();
-        this.userId = comment.getUserId();
+        this.userId = comment.getUser().getId();
         this.scheduleId = comment.getSchedule().getId();
         this.createdDate = comment.getCreatedDate();
     }

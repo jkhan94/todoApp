@@ -9,5 +9,5 @@ import lombok.Setter;
 public class CommentRequestDto {
     @NotBlank
     private String contents;
-    private Long userId;
+//    private Long userId;
 }

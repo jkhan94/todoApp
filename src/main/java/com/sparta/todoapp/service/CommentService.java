@@ -4,8 +4,11 @@ import com.sparta.todoapp.dto.CommentRequestDto;
 import com.sparta.todoapp.dto.CommentResponseDto;
 import com.sparta.todoapp.entity.Comment;
 import com.sparta.todoapp.entity.Schedule;
+import com.sparta.todoapp.entity.User;
 import com.sparta.todoapp.repository.CommentRepository;
 import com.sparta.todoapp.repository.ScheduleRepository;
+import com.sparta.todoapp.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,25 +20,32 @@ import java.util.List;
 public class CommentService {
     private final CommentRepository commentRepository;
     private final ScheduleRepository scheduleRepository;
+    private final UserRepository userRepository;
 
-    public CommentResponseDto createComment(Long scheduleId, CommentRequestDto requestDto) {
-        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(() -> new IllegalArgumentException("등록되지 않은 스케줄입니다."));
+    public CommentResponseDto createComment(Long scheduleId, CommentRequestDto requestDto, HttpServletRequest req) {
         Comment comment = new Comment(requestDto);
+
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(() -> new IllegalArgumentException("등록되지 않은 스케줄입니다."));
         comment.setSchedule(schedule);
+        User user = (User) req.getAttribute("user");
+        comment.setUser(user);
+
         Comment saveComment = commentRepository.save(comment);
         CommentResponseDto responseDto = new CommentResponseDto(saveComment);
         return responseDto;
     }
 
+    // 댓글 목록 조회
     public List<CommentResponseDto> findCommentById() {
         return commentRepository.findAll().stream().map(CommentResponseDto::new).toList();
     }
 
     @Transactional
-    public CommentResponseDto updateComment(Long scheduleId, Long commentId, CommentRequestDto requestDto) {
+    public CommentResponseDto updateComment(Long scheduleId, Long commentId, CommentRequestDto requestDto, HttpServletRequest req) {
         Comment comment = findCommentById(commentId);
-        if (comment.getSchedule().getId() != scheduleId) {
-            throw new IllegalArgumentException("수정할 수 없습니다");
+        User user = (User) req.getAttribute("user");
+        if (comment.getSchedule().getId() != scheduleId || comment.getUser().getId() != user.getId()) {
+            throw new IllegalArgumentException("수정할 수 없는 댓글입니다");
         } else {
             comment.update(requestDto);
             comment = findCommentById(commentId);
@@ -43,10 +53,10 @@ public class CommentService {
         }
     }
 
-    public void deleteComment(Long scheduleId, Long commentId) {
+    public void deleteComment(Long scheduleId, Long commentId, HttpServletRequest req) {
         Comment comment = findCommentById(commentId);
-        // || comment.getUserId() != requestDto.getUserId()
-        if (scheduleId != comment.getSchedule().getId()) {
+        User user = (User) req.getAttribute("user");
+        if (scheduleId != comment.getSchedule().getId() || comment.getUser().getId() != user.getId()) {
             throw new IllegalArgumentException("삭제할 수 없는 댓글 입니다");
         } else {
             commentRepository.delete(comment);

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "user")
 @Getter
@@ -31,6 +34,9 @@ public class User extends Timestamped {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
+    @OneToMany(mappedBy = "user")
+    private List<Comment> commentList = new ArrayList<>();
+
     public User(String nickname, String username, String password, UserRoleEnum role) {
         this.nickname = nickname;
         this.username = username;
@@ -38,6 +44,4 @@ public class User extends Timestamped {
         this.role = role;
     }
 
-    //    @OneToMany(mappedBy = "user")
-//    private List<Comment> commentList = new ArrayList<>();
 }

@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +31,11 @@ public class CommentController {
     @Operation(summary = "선택한 일정에 댓글 등록", description = "고유번호, 댓글 내용, 댓글을 작성한 사용자 아이디, 댓글이 작성된 일정 아이디, 작성일을 전달받아 디비에 저장")
     @Parameters({
             @Parameter(name = "contents", description = "댓글 내용", example = "요구사항에 맞춰서 댓글 CRUD 구현 완료"),
-            @Parameter(name = "userId", description = "댓글 작성자", example = "유저1"),
     })
-    public CommentResponseDto createComment(@PathVariable Long scheduleId, @RequestBody @Valid CommentRequestDto requestDto) {
-        return commentService.createComment(scheduleId, requestDto);
+    public CommentResponseDto createComment(@PathVariable Long scheduleId,
+                                            @RequestBody @Valid CommentRequestDto requestDto,
+                                            HttpServletRequest req) {
+        return commentService.createComment(scheduleId, requestDto, req);
     }
 
     @GetMapping
@@ -44,14 +46,17 @@ public class CommentController {
 
     @PutMapping("/{scheduleId}/{commentId}")
     @Operation(summary = "댓글 수정", description = "선택한 일정의 댓글 내용만 수정")
-    public CommentResponseDto updateComment(@PathVariable Long scheduleId, @PathVariable Long commentId, @RequestBody CommentRequestDto requestDto) {
-        return commentService.updateComment(scheduleId, commentId, requestDto);
+    public CommentResponseDto updateComment(@PathVariable Long scheduleId, @PathVariable Long commentId,
+                                            @RequestBody CommentRequestDto requestDto,
+                                            HttpServletRequest req) {
+        return commentService.updateComment(scheduleId, commentId, requestDto,req);
     }
 
     @DeleteMapping("/{scheduleId}/{commentId}")
     @Operation(summary = "댓글 삭제", description = "선택한 일정의 댓글을 삭제")
-    public ResponseEntity<CommonResponse> deleteComment(@PathVariable Long scheduleId, @PathVariable Long commentId) {
-        commentService.deleteComment(scheduleId, commentId);
+    public ResponseEntity<CommonResponse> deleteComment(@PathVariable Long scheduleId, @PathVariable Long commentId,
+                                                        HttpServletRequest req) {
+        commentService.deleteComment(scheduleId, commentId,req);
         return ResponseEntity.ok().body(CommonResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .msg("삭제가 완료 되었습니다.")
