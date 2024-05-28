@@ -3,13 +3,12 @@ package com.sparta.todoapp.controller;
 import com.sparta.todoapp.CommonResponse;
 import com.sparta.todoapp.dto.CommentRequestDto;
 import com.sparta.todoapp.dto.CommentResponseDto;
-import com.sparta.todoapp.dto.ScheduleRequestDto;
-import com.sparta.todoapp.entity.StatusEnum;
 import com.sparta.todoapp.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +30,9 @@ public class CommentController {
     @Operation(summary = "선택한 일정에 댓글 등록", description = "고유번호, 댓글 내용, 댓글을 작성한 사용자 아이디, 댓글이 작성된 일정 아이디, 작성일을 전달받아 디비에 저장")
     @Parameters({
             @Parameter(name = "contents", description = "댓글 내용", example = "요구사항에 맞춰서 댓글 CRUD 구현 완료"),
-            @Parameter(name = "createdDate", description = "댓글 작성일자", example = "2024-05-27"),
+            @Parameter(name = "userId", description = "댓글 작성자", example = "유저1"),
     })
-    public CommentResponseDto createComment(@PathVariable Long scheduleId, @RequestBody CommentRequestDto requestDto) {
+    public CommentResponseDto createComment(@PathVariable Long scheduleId, @RequestBody @Valid CommentRequestDto requestDto) {
         return commentService.createComment(scheduleId, requestDto);
     }
 
@@ -45,7 +44,7 @@ public class CommentController {
 
     @PutMapping("/{scheduleId}/{commentId}")
     @Operation(summary = "댓글 수정", description = "선택한 일정의 댓글 내용만 수정")
-    public CommentResponseDto updateComment(@PathVariable Long scheduleId,@PathVariable Long commentId, @RequestBody CommentRequestDto requestDto) {
+    public CommentResponseDto updateComment(@PathVariable Long scheduleId, @PathVariable Long commentId, @RequestBody CommentRequestDto requestDto) {
         return commentService.updateComment(scheduleId, commentId, requestDto);
     }
 
