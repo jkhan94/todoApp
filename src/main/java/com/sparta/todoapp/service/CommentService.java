@@ -7,7 +7,6 @@ import com.sparta.todoapp.dto.CommentResponseDto;
 import com.sparta.todoapp.entity.Comment;
 import com.sparta.todoapp.entity.Schedule;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

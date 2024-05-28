@@ -10,17 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="schedule")
+@Table(name = "schedule")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Schedule extends Timestamped{
+public class Schedule extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "title", nullable = false, length=255)
+    @Column(name = "title", nullable = false, length = 255)
     private String title;
-    @Column(name = "contents", nullable = false, length=500)
+    @Column(name = "contents", nullable = false, length = 500)
     private String contents;
     @Column(name = "reponsibility", nullable = false, length = 255)
     private String responsibility;

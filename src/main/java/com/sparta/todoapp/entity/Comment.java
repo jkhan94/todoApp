@@ -24,6 +24,10 @@ public class Comment extends Timestamped {
     @JoinColumn(name = "schedule_id", nullable = false)
     private Schedule schedule;
 
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
+
     public Comment(CommentRequestDto requestDto) {
         this.contents = requestDto.getContents();
         this.userId = requestDto.getUserId();

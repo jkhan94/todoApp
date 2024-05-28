@@ -19,7 +19,7 @@ public class ScheduleResponseDto {
     private String title;
     private String contents;
     private String responsibility;
-//    private String password;
+    //    private String password;
     private Timestamp createdDate;
     private List<CommentResponseDto> comments;
 

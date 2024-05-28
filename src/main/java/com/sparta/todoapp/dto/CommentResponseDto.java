@@ -1,7 +1,6 @@
 package com.sparta.todoapp.dto;
 
 import com.sparta.todoapp.entity.Comment;
-import com.sparta.todoapp.entity.Schedule;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +20,8 @@ public class CommentResponseDto {
     private Timestamp createdDate;
 
     public CommentResponseDto(Comment comment) {
-        this.id= comment.getId();
-        this.contents=comment.getContents();
+        this.id = comment.getId();
+        this.contents = comment.getContents();
         this.userId = comment.getUserId();
         this.scheduleId = comment.getSchedule().getId();
         this.createdDate = comment.getCreatedDate();

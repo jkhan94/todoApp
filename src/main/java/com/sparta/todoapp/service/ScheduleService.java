@@ -37,7 +37,8 @@ public class ScheduleService {
         if (schedule.getPassword().equals(requestDto.getPassword())) {
             schedule.update(requestDto);
 
-            schedule = findSchedule(id);; // 수정된 내용을 불러옴
+            schedule = findSchedule(id);
+            ; // 수정된 내용을 불러옴
             return new ScheduleResponseDto(schedule);
         } else {
             throw new IllegalArgumentException("수정할 수 없습니다.");
