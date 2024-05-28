@@ -1,8 +1,9 @@
 package com.sparta.todoapp.controller;
 
-import com.sparta.todoapp.CommonResponse;
 import com.sparta.todoapp.dto.CommentRequestDto;
 import com.sparta.todoapp.dto.CommentResponseDto;
+import com.sparta.todoapp.exception.CommonResponse;
+import com.sparta.todoapp.exception.CustomException;
 import com.sparta.todoapp.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.sparta.todoapp.exception.ErrorEnum.NOT_VALID_ARGUMENTS;
 
 // Swagger 링크: http://localhost:8080/swagger-ui/index.html#/
 @RestController
@@ -35,6 +38,8 @@ public class CommentController {
     public CommentResponseDto createComment(@PathVariable Long scheduleId,
                                             @RequestBody @Valid CommentRequestDto requestDto,
                                             HttpServletRequest req) {
+        validateScheduleId(scheduleId);
+        validateContent(requestDto);
         return commentService.createComment(scheduleId, requestDto, req);
     }
 
@@ -47,20 +52,42 @@ public class CommentController {
     @PutMapping("/{scheduleId}/{commentId}")
     @Operation(summary = "댓글 수정", description = "선택한 일정의 댓글 내용만 수정")
     public CommentResponseDto updateComment(@PathVariable Long scheduleId, @PathVariable Long commentId,
-                                            @RequestBody CommentRequestDto requestDto,
+                                            @RequestBody @Valid CommentRequestDto requestDto,
                                             HttpServletRequest req) {
-        return commentService.updateComment(scheduleId, commentId, requestDto,req);
+        validateScheduleId(scheduleId);
+        validateCommentId(commentId);
+        validateContent(requestDto);
+        return commentService.updateComment(scheduleId, commentId, requestDto, req);
     }
 
     @DeleteMapping("/{scheduleId}/{commentId}")
     @Operation(summary = "댓글 삭제", description = "선택한 일정의 댓글을 삭제")
     public ResponseEntity<CommonResponse> deleteComment(@PathVariable Long scheduleId, @PathVariable Long commentId,
                                                         HttpServletRequest req) {
-        commentService.deleteComment(scheduleId, commentId,req);
+        validateScheduleId(scheduleId);
+        validateCommentId(commentId);
+        commentService.deleteComment(scheduleId, commentId, req);
         return ResponseEntity.ok().body(CommonResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .msg("삭제가 완료 되었습니다.")
                 .build());
     }
 
+    private static void validateScheduleId(Long scheduleId) {
+        if (scheduleId == null) {
+            throw new CustomException(NOT_VALID_ARGUMENTS);
+        }
+    }
+
+    private void validateCommentId(Long commentId) {
+        if (commentId == null) {
+            throw new CustomException(NOT_VALID_ARGUMENTS);
+        }
+    }
+
+    private static void validateContent(CommentRequestDto requestDto) {
+        if (requestDto.getContents().isEmpty()) {
+            throw new CustomException(NOT_VALID_ARGUMENTS);
+        }
+    }
 }

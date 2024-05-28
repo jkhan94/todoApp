@@ -3,11 +3,15 @@ package com.sparta.todoapp.service;
 import com.sparta.todoapp.dto.ScheduleRequestDto;
 import com.sparta.todoapp.dto.ScheduleResponseDto;
 import com.sparta.todoapp.entity.Schedule;
+import com.sparta.todoapp.exception.CustomException;
 import com.sparta.todoapp.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static com.sparta.todoapp.exception.ErrorEnum.BAD_PASSWORD;
+import static com.sparta.todoapp.exception.ErrorEnum.SCHEDULE_NOT_FOUND;
 
 @Service
 public class ScheduleService {
@@ -41,7 +45,7 @@ public class ScheduleService {
             // 수정된 내용을 불러옴
             return new ScheduleResponseDto(schedule);
         } else {
-            throw new IllegalArgumentException("수정할 수 없습니다.");
+            throw new CustomException(BAD_PASSWORD);
         }
     }
 
@@ -51,11 +55,11 @@ public class ScheduleService {
         if (schedule.getPassword().equals(password)) {
             scheduleRepository.delete(schedule);
         } else {
-            throw new IllegalArgumentException("삭제할 수 없습니다.");
+            throw new CustomException(BAD_PASSWORD);
         }
     }
 
     private Schedule findSchedule(Long id) {
-        return scheduleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("선택한 스케줄은 존재하지 않습니다."));
+        return scheduleRepository.findById(id).orElseThrow(() -> new CustomException(SCHEDULE_NOT_FOUND));
     }
 }

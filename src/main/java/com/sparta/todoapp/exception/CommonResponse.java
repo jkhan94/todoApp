@@ -1,4 +1,4 @@
-package com.sparta.todoapp;
+package com.sparta.todoapp.exception;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +8,8 @@ import lombok.Setter;
 @Setter
 @Builder
 public class CommonResponse<T> {
-    private Integer statusCode;
+    private int statusCode;
     private String msg;
     private T data;
+
 }
