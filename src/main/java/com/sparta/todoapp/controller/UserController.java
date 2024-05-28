@@ -27,7 +27,7 @@ import static com.sparta.todoapp.exception.ErrorEnum.NOT_VALID_ARGUMENTS;
 // 로그인, 회원가입 html 페이지 반환
 @Slf4j
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;

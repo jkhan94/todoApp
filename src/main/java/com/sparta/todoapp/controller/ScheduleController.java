@@ -13,7 +13,7 @@ import java.util.List;
 
 // Swagger 링크: http://localhost:8080/swagger-ui/index.html#/
 @RestController
-@RequestMapping("/todo")
+@RequestMapping("/api/todo")
 @Tag(name = "Schedule CRUD", description = "스케줄 등록, 조회, 수정, 삭제 컨트롤러")
 public class ScheduleController {
     private final ScheduleService scheduleService;
@@ -34,7 +34,7 @@ public class ScheduleController {
         return scheduleService.createSchedule(requestDto);
     }
 
-    @GetMapping
+    @GetMapping("/read")
     @Operation(summary = "스케줄 조회", description = "디비에 저장된 스케줄의 제목, 내용, 담당자, 작성일을 조회할 때 사용하는 API")
     public List<ScheduleResponseDto> getSchedules() {
         return scheduleService.getSchedules();
