@@ -34,8 +34,11 @@ public class User extends Timestamped {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userSchedule", cascade = CascadeType.REMOVE)
+    private List<Schedule> scheduleList = new ArrayList<>();
 
     public User(String nickname, String username, String password, UserRoleEnum role) {
         this.nickname = nickname;

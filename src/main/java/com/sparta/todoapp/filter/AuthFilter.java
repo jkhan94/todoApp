@@ -38,7 +38,7 @@ public class AuthFilter implements Filter {
         // 회원가입, 로그인, swagger, 조회 관련 API 는 인증 필요없이 요청 진행
         if (StringUtils.hasText(url)
                 && (url.startsWith("/user") || url.endsWith("/read")
-                || url.contains("swagger")|| url.contains("api-docs") )) {
+                || url.contains("swagger") || url.contains("api-docs"))) {
             chain.doFilter(request, response); // 다음 Filter 로 이동
         } else {
             // 나머지 API 요청은 인증 처리 진행

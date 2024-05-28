@@ -27,8 +27,12 @@ public class Schedule extends Timestamped {
     @Column(name = "password", nullable = false, length = 255)
     private String password;
 
-    @OneToMany(mappedBy = "schedule")
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User userSchedule;
 
     public Schedule(ScheduleRequestDto requestDto) {
         this.title = requestDto.getTitle();

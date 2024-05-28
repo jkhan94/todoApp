@@ -22,6 +22,7 @@ public class ScheduleResponseDto {
     //    private String password;
     private Timestamp createdDate;
     private List<CommentResponseDto> comments;
+    private Long userId;
 
     public ScheduleResponseDto(Schedule schedule) {
         this.id = schedule.getId();
@@ -31,5 +32,6 @@ public class ScheduleResponseDto {
 //        this.password = schedule.getPassword();
         this.createdDate = schedule.getCreatedDate();
         this.comments = schedule.getCommentList().stream().map(CommentResponseDto::new).collect(Collectors.toList());
+        this.userId = schedule.getUserSchedule().getId();
     }
 }
