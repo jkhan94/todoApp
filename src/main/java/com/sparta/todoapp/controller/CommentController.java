@@ -20,7 +20,7 @@ import static com.sparta.todoapp.exception.ErrorEnum.NOT_VALID_ARGUMENTS;
 
 // Swagger 링크: http://localhost:8080/swagger-ui/index.html#/
 @RestController
-@RequestMapping("/api/comment")
+@RequestMapping("/comment")
 @Tag(name = "Comment CRUD", description = "댓글 등록, 조회, 수정, 삭제 컨트롤러")
 public class CommentController {
     private final CommentService commentService;
@@ -36,7 +36,7 @@ public class CommentController {
                                                 @RequestBody @Valid CommentRequestDto requestDto,
                                                 HttpServletRequest req) {
         validateScheduleId(scheduleId);
-        validateContent(requestDto);
+        validateComment(requestDto);
         return commentService.createComment(scheduleId, requestDto, req);
     }
 
@@ -53,7 +53,7 @@ public class CommentController {
                                             HttpServletRequest req) {
         validateScheduleId(scheduleId);
         validateCommentId(commentId);
-        validateContent(requestDto);
+        validateComment(requestDto);
         return commentService.updateComment(scheduleId, commentId, requestDto, req);
     }
 
@@ -82,7 +82,7 @@ public class CommentController {
         }
     }
 
-    private static void validateContent(CommentRequestDto requestDto) {
+    private static void validateComment(CommentRequestDto requestDto) {
         if (requestDto.getContents().isEmpty()) {
             throw new CustomException(NOT_VALID_ARGUMENTS);
         }

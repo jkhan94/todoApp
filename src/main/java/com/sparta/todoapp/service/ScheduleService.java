@@ -25,9 +25,7 @@ public class ScheduleService {
         Schedule schedule = new Schedule(requestDto);
         Schedule saveSchedule = scheduleRepository.save(schedule);
         // Entity -> ResponseDto
-        ScheduleResponseDto scheduleResponseDto = new ScheduleResponseDto(schedule);
-
-        return scheduleResponseDto;
+        return new ScheduleResponseDto(schedule);
     }
 
     public List<ScheduleResponseDto> getSchedules() {

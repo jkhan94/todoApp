@@ -51,12 +51,7 @@ public class CommentService {
         Comment comment = findCommentById(commentId);
         User user = (User) req.getAttribute("user");
 
-        if (comment.getSchedule().getId() != scheduleId) {
-            throw new CustomException(SCHEDULE_NOT_FOUND);
-        }
-        if (comment.getUser().getId() != user.getId()) {
-            throw new CustomException(NOT_AVAILABLE_USER);
-        }
+        checkId(scheduleId, comment, user);
 
         try {
             comment.update(requestDto);
@@ -71,12 +66,7 @@ public class CommentService {
         Comment comment = findCommentById(commentId);
         User user = (User) req.getAttribute("user");
 
-        if (comment.getSchedule().getId() != scheduleId) {
-            throw new CustomException(SCHEDULE_NOT_FOUND);
-        }
-        if (comment.getUser().getId() != user.getId()) {
-            throw new CustomException(NOT_AVAILABLE_USER);
-        }
+        checkId(scheduleId, comment, user);
 
         try {
             commentRepository.delete(comment);
@@ -87,6 +77,15 @@ public class CommentService {
 
     private Comment findCommentById(Long commentId) {
         return commentRepository.findById(commentId).orElseThrow(() -> new CustomException(COMMENT_NOT_FOUND));
+    }
+
+    private static void checkId(Long scheduleId, Comment comment, User user) {
+        if (comment.getSchedule().getId() != scheduleId) {
+            throw new CustomException(SCHEDULE_NOT_FOUND);
+        }
+        if (comment.getUser().getId() != user.getId()) {
+            throw new CustomException(NOT_AVAILABLE_USER);
+        }
     }
 
 }
