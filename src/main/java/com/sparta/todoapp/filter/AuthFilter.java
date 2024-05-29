@@ -36,6 +36,10 @@ public class AuthFilter implements Filter {
         String url = httpServletRequest.getRequestURI();
 
         // 회원가입, 로그인, swagger, 조회 관련 API 는 인증 필요없이 요청 진행
+        // 스웨거 URL 요청 순서.
+        // /swagger-ui/swagger-initializer.js
+        // /v3/api-docs/swagger-config
+        // /v3/api-docs
         if (StringUtils.hasText(url)
                 && (url.startsWith("/user") || url.endsWith("/read")
                 || url.contains("swagger") || url.contains("api-docs"))) {
