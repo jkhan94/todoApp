@@ -39,6 +39,5 @@ public enum ErrorEnum {
     INTERNAL_SERVER_ERROR(500, "서버 에러입니다. 서버 팀에 연락주세요!");
 
     int statusCode;
-    //    String code;
     String msg; // 출력 메시지
 }
