@@ -30,7 +30,7 @@ import static com.sparta.todoapp.exception.ErrorEnum.SCHEDULE_NOT_FOUND;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/todo")
+@RequestMapping("/schedule")
 @Tag(name = "Schedule CRUD",
         description = "스케줄 등록, 조회, 수정, 삭제 컨트롤러.<br>" +
                 "등록, 수정, 삭제는 인가된 사용자만 할 수 있음.<br>  " +
@@ -56,7 +56,7 @@ public class ScheduleController {
                                                          HttpServletRequest req) {
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         // 오류가 발생했다면 어느 필드에서 에러가 발생했는지 출력
-        if (fieldErrors.size() > 0) {
+        if (!fieldErrors.isEmpty()) {
             for (FieldError fieldError : bindingResult.getFieldErrors()) {
                 log.error(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
             }
@@ -103,7 +103,7 @@ public class ScheduleController {
         validateScheduleId(scheduleId);
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         // 오류가 발생했다면 어느 필드에서 에러가 발생했는지 출력
-        if (fieldErrors.size() > 0) {
+        if (!fieldErrors.isEmpty()) {
             for (FieldError fieldError : bindingResult.getFieldErrors()) {
                 log.error(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
             }

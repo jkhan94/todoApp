@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.sparta.todoapp.exception.ErrorEnum.*;
 
@@ -80,10 +81,10 @@ public class CommentService {
     }
 
     private static void checkId(Long scheduleId, Comment comment, User user) {
-        if (comment.getSchedule().getId() != scheduleId) {
+        if (!comment.getSchedule().getId().equals(scheduleId)) {
             throw new CustomException(SCHEDULE_NOT_FOUND);
         }
-        if (comment.getUser().getId() != user.getId()) {
+        if (!comment.getUser().getId().equals(user.getId())) {
             throw new CustomException(NOT_AVAILABLE_USER);
         }
     }

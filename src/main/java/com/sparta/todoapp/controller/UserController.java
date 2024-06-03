@@ -61,7 +61,7 @@ public class UserController {
         // bindingResult에 오류 목록 저장
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         // 오류가 발생했다면 어느 필드에서 에러가 발생했는지 출력
-        if (fieldErrors.size() > 0) {
+        if (!fieldErrors.isEmpty()) {
             for (FieldError fieldError : bindingResult.getFieldErrors()) {
                 log.error(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
             }
@@ -95,7 +95,7 @@ public class UserController {
     public ResponseEntity<CommonResponse> login(@Valid @ModelAttribute LoginRequestDto requestDto, BindingResult bindingResult, HttpServletResponse res) {
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         // 오류가 발생했다면 어느 필드에서 에러가 발생했는지 출력
-        if (fieldErrors.size() > 0) {
+        if (!fieldErrors.isEmpty()) {
             for (FieldError fieldError : bindingResult.getFieldErrors()) {
                 log.error(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
             }

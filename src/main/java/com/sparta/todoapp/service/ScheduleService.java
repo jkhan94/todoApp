@@ -66,7 +66,7 @@ public class ScheduleService {
         if (!schedule.getPassword().equals(requestDto.getPassword())) {
             throw new CustomException(BAD_PASSWORD);
         }
-        if (schedule.getUserSchedule().getId() != user.getId()) {
+        if (!schedule.getUserSchedule().getId().equals(user.getId())) {
             throw new CustomException(NOT_AVAILABLE_USER);
         }
     }

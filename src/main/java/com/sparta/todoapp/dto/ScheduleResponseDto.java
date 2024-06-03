@@ -28,7 +28,6 @@ public class ScheduleResponseDto {
 
     @Schema(description = "담당자(이메일 형식)", name = "responsibility", type = "String", example = "apiSpecification@example.com")
     private String responsibility;
-    //    private String password;
 
     @Schema(description = "스케줄 작성일", name = "createdDate", type = "Timestamp", example = "2024-05-27 16:45:04.570942")
     private Timestamp createdDate;
@@ -44,7 +43,6 @@ public class ScheduleResponseDto {
         this.title = schedule.getTitle();
         this.contents = schedule.getContents();
         this.responsibility = schedule.getResponsibility();
-//        this.password = schedule.getPassword();
         this.createdDate = schedule.getCreatedDate();
         this.comments = schedule.getCommentList().stream().map(CommentResponseDto::new).collect(Collectors.toList());
         this.userId = schedule.getUserSchedule().getId();

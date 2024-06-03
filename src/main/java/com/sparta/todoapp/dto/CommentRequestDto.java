@@ -12,5 +12,4 @@ public class CommentRequestDto {
     @Schema(description = "댓글 내용. 공백을 허용하지 않음", name = "contents", type = "String", example = "API 명세서를 Swagger로 작성합니다.")
     @NotBlank
     private String contents;
-//    private Long userId;
 }
