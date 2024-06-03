@@ -47,13 +47,8 @@ public class UserController {
     })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "가입되었습니다."),
-            @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요.<br> 중복된 username 입니다.<br>관리자 암호가 틀립니다.<br>" +
-                    "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
-//            @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요."),
-//            @ApiResponse(responseCode = "400", description = "중복된 username 입니다."),
-//            @ApiResponse(responseCode = "400", description = "관리자 암호가 틀립니다."),
-//            @ApiResponse(responseCode = "400", description = "토큰이 유효하지 않습니다."),
-//            @ApiResponse(responseCode = "400", description = "회원을 찾을 수 없습니다.")
+            @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요.<br> 중복된 username 입니다.<br>관리자 암호가 틀립니다."),
+            @ApiResponse(responseCode = "401", description = "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
     })
     @PostMapping("/signup")
     public ResponseEntity<CommonResponse> signup(@Valid @ModelAttribute SignupRequestDto requestDto, BindingResult bindingResult) {
@@ -86,10 +81,8 @@ public class UserController {
     })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "로그인되었습니다."),
-            @ApiResponse(responseCode = "400", description = "로그인 실패!<br> 토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
-//          @ApiResponse(responseCode = "400", description = "로그인 실패!"),
-//          @ApiResponse(responseCode = "400", description = "토큰이 유효하지 않습니다.")
-//          @ApiResponse(responseCode = "400", description = "회원을 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "로그인 실패!"),
+            @ApiResponse(responseCode = "401", description = "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
     })
     @PostMapping("/login")
     public ResponseEntity<CommonResponse> login(@Valid @ModelAttribute LoginRequestDto requestDto, BindingResult bindingResult, HttpServletResponse res) {

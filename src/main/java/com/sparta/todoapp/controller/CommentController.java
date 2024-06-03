@@ -25,7 +25,6 @@ import java.util.List;
 
 import static com.sparta.todoapp.exception.ErrorEnum.*;
 
-// Swagger 링크: http://localhost:8080/swagger-ui/index.html#/
 @Tag(name = "Comment CRUD", description = "댓글 등록, 조회, 수정, 삭제 컨트롤러")
 @Slf4j
 @RestController
@@ -43,13 +42,8 @@ public class CommentController {
     })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "댓글이 등록되었습니다."),
-            @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요.<br> 등록되지 않은 스케줄입니다.<br>디비 저장에 실패했습니다.<br>" +
-                    "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
-//            @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요."),
-//            @ApiResponse(responseCode = "400", description = "등록되지 않은 스케줄입니다."),
-//            @ApiResponse(responseCode = "400", description = "디비 저장에 실패했습니다."),
-//            @ApiResponse(responseCode = "400", description = "토큰이 유효하지 않습니다."),
-//            @ApiResponse(responseCode = "400", description = "회원을 찾을 수 없습니다.")
+            @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요.<br> 등록되지 않은 스케줄입니다.<br>디비 저장에 실패했습니다.<br>"),
+            @ApiResponse(responseCode = "401", description = "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
     })
     @PostMapping("/{scheduleId}")
     public ResponseEntity<CommonResponse> createComment(@PathVariable Long scheduleId, @RequestBody @Valid CommentRequestDto requestDto,
@@ -93,15 +87,9 @@ public class CommentController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "댓글이 수정되었습니다."),
             @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요.<br> 등록되지 않은 댓글입니다.<br>등록되지 않은 스케줄입니다.<br>" +
-                    "작성자만 삭제/수정할 수 있습니다.<br>디비 저장에 실패했습니다.<br>" +
-                    "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
-//            @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요."),
-//            @ApiResponse(responseCode = "400", description = "등록되지 않은 댓글입니다."),
-//            @ApiResponse(responseCode = "400", description = "등록되지 않은 스케줄입니다."),
-//            @ApiResponse(responseCode = "400", description = "작성자만 삭제/수정할 수 있습니다."),
-//            @ApiResponse(responseCode = "400", description = "디비 저장에 실패했습니다."),
-//            @ApiResponse(responseCode = "400", description = "토큰이 유효하지 않습니다."),
-//            @ApiResponse(responseCode = "400", description = "회원을 찾을 수 없습니다.")
+                    "디비 저장에 실패했습니다.<br>"),
+            @ApiResponse(responseCode = "403", description = "작성자만 삭제/수정할 수 있습니다."),
+            @ApiResponse(responseCode = "401", description = "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
     })
     @PutMapping("/{scheduleId}/{commentId}")
     public ResponseEntity<CommonResponse> updateComment(@PathVariable Long scheduleId, @PathVariable Long commentId,
@@ -137,15 +125,9 @@ public class CommentController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "댓글이 삭제되었습니다."),
             @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요.<br> 등록되지 않은 댓글입니다.<br>등록되지 않은 스케줄입니다.<br>" +
-                    "작성자만 삭제/수정할 수 있습니다.<br>디비 저장에 실패했습니다.<br>" +
-                    "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
-//            @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요."),
-//            @ApiResponse(responseCode = "400", description = "등록되지 않은 댓글입니다."),
-//            @ApiResponse(responseCode = "400", description = "등록되지 않은 스케줄입니다."),
-//            @ApiResponse(responseCode = "400", description = "작성자만 삭제/수정할 수 있습니다."),
-//            @ApiResponse(responseCode = "400", description = "디비 저장에 실패했습니다."),
-//            @ApiResponse(responseCode = "400", description = "토큰이 유효하지 않습니다."),
-//            @ApiResponse(responseCode = "400", description = "회원을 찾을 수 없습니다.")
+                    "디비 저장에 실패했습니다."),
+            @ApiResponse(responseCode = "403", description = "작성자만 삭제/수정할 수 있습니다."),
+            @ApiResponse(responseCode = "401", description = "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
     })
     @DeleteMapping("/{scheduleId}/{commentId}")
     public ResponseEntity<CommonResponse> deleteComment(@PathVariable Long scheduleId, @PathVariable Long commentId,
