@@ -4,12 +4,10 @@ import com.sparta.todoapp.dto.CommentRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "comment")
 @Getter
-@Setter
 @NoArgsConstructor
 public class Comment extends Timestamped {
     @Id
@@ -32,5 +30,13 @@ public class Comment extends Timestamped {
 
     public void update(CommentRequestDto requestDto) {
         this.contents = requestDto.getContents();
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

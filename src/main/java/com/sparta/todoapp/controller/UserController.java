@@ -81,8 +81,7 @@ public class UserController {
     })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "로그인되었습니다."),
-            @ApiResponse(responseCode = "400", description = "로그인 실패!"),
-            @ApiResponse(responseCode = "401", description = "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
+            @ApiResponse(responseCode = "401", description = "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.<br>로그인 실패! 아이디와 비밀번호를 확인해주세요.")
     })
     @PostMapping("/login")
     public ResponseEntity<CommonResponse> login(@Valid @ModelAttribute LoginRequestDto requestDto, BindingResult bindingResult, HttpServletResponse res) {

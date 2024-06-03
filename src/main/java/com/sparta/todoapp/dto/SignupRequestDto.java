@@ -4,11 +4,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
-import lombok.Setter;
 
 @Schema(description = "회원가입 요청")
 @Getter
-@Setter
 public class SignupRequestDto {
     @Schema(description = "유저 별명", name = "nickname", type = "String", example = "관리자")
     @NotBlank
@@ -28,4 +26,20 @@ public class SignupRequestDto {
     private boolean admin = false;
     @Schema(description = "관리자 계정으로 가입하기 위해 입력해야 하는 값", name = "adminToken", type = "String")
     private String adminToken = ""; // 공백
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAdminToken(String adminToken) {
+        this.adminToken = adminToken;
+    }
 }

@@ -4,7 +4,6 @@ import com.sparta.todoapp.dto.ScheduleRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
 @Entity
 @Table(name = "schedule")
 @Getter
-@Setter
 @NoArgsConstructor
 public class Schedule extends Timestamped {
     @Id
@@ -46,5 +44,9 @@ public class Schedule extends Timestamped {
         this.contents = requestDto.getContents();
         this.responsibility = requestDto.getResponsibility();
         this.password = requestDto.getPassword();
+    }
+
+    public void setUserSchedule(User userSchedule) {
+        this.userSchedule = userSchedule;
     }
 }

@@ -2,18 +2,14 @@ package com.sparta.todoapp.dto;
 
 import com.sparta.todoapp.entity.Comment;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Schema(description = "댓글 응답")
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class CommentResponseDto {
     @Schema(description = "댓글 고유번호", name = "id", type = "Long", example = "1")
     private Long id;

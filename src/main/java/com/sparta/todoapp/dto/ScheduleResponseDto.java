@@ -2,10 +2,8 @@ package com.sparta.todoapp.dto;
 
 import com.sparta.todoapp.entity.Schedule;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -13,9 +11,7 @@ import java.util.stream.Collectors;
 
 @Schema(description = "스케줄 응답")
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class ScheduleResponseDto {
     @Schema(description = "스케줄 아이디(고유번호)", name = "id", type = "Long", example = "1")
     private Long id;

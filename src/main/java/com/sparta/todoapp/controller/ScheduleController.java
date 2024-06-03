@@ -86,8 +86,8 @@ public class ScheduleController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "스케줄이 수정되었습니다."),
             @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요.<br> 등록되지 않은 스케줄입니다.<br>비밀번호가 틀립니다."),
-            @ApiResponse(responseCode = "403", description = "작성자만 삭제/수정할 수 있습니다."),
-            @ApiResponse(responseCode = "401", description = "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
+            @ApiResponse(responseCode = "401", description = "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "403", description = "작성자만 삭제/수정할 수 있습니다.")
     })
     @PutMapping("/{scheduleId}")
     public ResponseEntity<CommonResponse> updateSchedule(@PathVariable Long scheduleId, @Valid @RequestBody ScheduleRequestDto requestDto,
@@ -121,8 +121,8 @@ public class ScheduleController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "스케줄이 삭제되었습니다."),
             @ApiResponse(responseCode = "400", description = "입력값을 확인해주세요.<br> 등록되지 않은 스케줄입니다.<br>비밀번호가 틀립니다."),
-            @ApiResponse(responseCode = "403", description = "작성자만 삭제/수정할 수 있습니다."),
-            @ApiResponse(responseCode = "401", description = "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다.")
+            @ApiResponse(responseCode = "401", description = "토큰이 유효하지 않습니다.<br>회원을 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "403", description = "작성자만 삭제/수정할 수 있습니다.")
     })
     @DeleteMapping("/{scheduleId}")
     public ResponseEntity<CommonResponse> deleteSchedule(@PathVariable Long scheduleId, @RequestBody ScheduleRequestDto requestDto, HttpServletRequest req) {
