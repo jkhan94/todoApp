@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.sql.Timestamp;
 
+// 공통 열은 이렇게 따로 빼는 게 좋다.
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)

@@ -1,5 +1,6 @@
 package com.sparta.todoapp.controller;
 
+import com.sparta.todoapp.config.JwtConfig;
 import com.sparta.todoapp.dto.LoginRequestDto;
 import com.sparta.todoapp.dto.SignupRequestDto;
 import com.sparta.todoapp.exception.CommonResponse;
@@ -106,7 +107,7 @@ public class UserController {
         return ResponseEntity.ok().body(CommonResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .msg("로그인되었습니다.")
-                .data(res.getHeader(JwtUtil.AUTHORIZATION_HEADER))
+                .data(res.getHeader(JwtConfig.AUTHORIZATION_HEADER))
                 .build());
     }
 }

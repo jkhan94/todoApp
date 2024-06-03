@@ -1,6 +1,7 @@
 package com.sparta.todoapp.service;
 
 
+import com.sparta.todoapp.config.JwtConfig;
 import com.sparta.todoapp.dto.LoginRequestDto;
 import com.sparta.todoapp.dto.SignupRequestDto;
 import com.sparta.todoapp.entity.User;
@@ -66,6 +67,6 @@ public class UserService {
 
         // JWT 생성 및 Response 객체의 헤더에 추가
         String token = jwtUtil.createToken(user.getUsername(), user.getRole());
-        res.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
+        res.addHeader(JwtConfig.AUTHORIZATION_HEADER, token);
     }
 }

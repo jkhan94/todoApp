@@ -23,7 +23,7 @@ public class SignupRequestDto {
     private String password;
 
     @Schema(description = "관리자 계정인지 확인", name = "admin", type = "boolean")
-    private boolean admin = false;
+    private final boolean admin = false;
     @Schema(description = "관리자 계정으로 가입하기 위해 입력해야 하는 값", name = "adminToken", type = "String")
     private String adminToken = ""; // 공백
 

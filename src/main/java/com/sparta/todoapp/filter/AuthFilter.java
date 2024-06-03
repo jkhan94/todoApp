@@ -12,7 +12,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -22,9 +21,11 @@ import java.io.IOException;
 import static com.sparta.todoapp.exception.ErrorEnum.BAD_TOKEN;
 import static com.sparta.todoapp.exception.ErrorEnum.USER_NOT_FOUND;
 
+// FilterRegistrationBean 을 통해 필터 등록도 가능.
+// 지금은 필터 자체로 설정했지만 필터 개수가 많다면 필터를 만들고 config 만들어서 정리하는 게 필터 체인 파악하기 쉬울 듯.
 @Slf4j(topic = "AuthFilter")
 @Component
-@Order(2)
+//@Order(2)
 @RequiredArgsConstructor
 public class AuthFilter implements Filter {
     private final UserRepository userRepository;

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "comment")
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor // JPA가 세팅할 때 기본 생성자가 필요. JPA 인스턴스화 리플렉션.
 public class Comment extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

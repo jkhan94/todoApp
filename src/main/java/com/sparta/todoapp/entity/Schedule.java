@@ -26,7 +26,7 @@ public class Schedule extends Timestamped {
     private String password;
 
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.REMOVE)
-    private List<Comment> commentList = new ArrayList<>();
+    private final List<Comment> commentList = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

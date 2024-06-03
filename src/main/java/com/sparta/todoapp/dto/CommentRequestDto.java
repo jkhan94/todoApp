@@ -8,6 +8,6 @@ import lombok.Getter;
 @Getter
 public class CommentRequestDto {
     @Schema(description = "댓글 내용. 공백을 허용하지 않음", name = "contents", type = "String", example = "API 명세서를 Swagger로 작성합니다.")
-    @NotBlank
+    @NotBlank(message = "입력된 내용이 없습니다!")
     private String contents;
 }
